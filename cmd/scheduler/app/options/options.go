@@ -23,6 +23,8 @@ import (
 	"time"
 
 	schedulerappconfig "github.com/QuarfotPrice/sched.dev/cmd/scheduler/app/config"
+	kubeschedulerconfig "github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config/validation"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/uuid"
@@ -43,8 +45,6 @@ import (
 	"k8s.io/component-base/logs"
 	"k8s.io/component-base/metrics"
 	"k8s.io/kubernetes/pkg/scheduler"
-	kubeschedulerconfig "k8s.io/kubernetes/pkg/scheduler/apis/config"
-	"k8s.io/kubernetes/pkg/scheduler/apis/config/validation"
 	netutils "k8s.io/utils/net"
 )
 

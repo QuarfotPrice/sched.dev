@@ -28,6 +28,12 @@ import (
 
 	schedulerserverconfig "github.com/QuarfotPrice/sched.dev/cmd/scheduler/app/config"
 	"github.com/QuarfotPrice/sched.dev/cmd/scheduler/app/options"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler"
+	kubeschedulerconfig "github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config/latest"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/framework/runtime"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/metrics/resources"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/profile"
 	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/apiserver/pkg/authentication/authenticator"
 	"k8s.io/apiserver/pkg/authorization/authorizer"
@@ -51,12 +57,6 @@ import (
 	"k8s.io/component-base/version"
 	"k8s.io/component-base/version/verflag"
 	"k8s.io/klog/v2"
-	"k8s.io/kubernetes/pkg/scheduler"
-	kubeschedulerconfig "k8s.io/kubernetes/pkg/scheduler/apis/config"
-	"k8s.io/kubernetes/pkg/scheduler/apis/config/latest"
-	"k8s.io/kubernetes/pkg/scheduler/framework/runtime"
-	"k8s.io/kubernetes/pkg/scheduler/metrics/resources"
-	"k8s.io/kubernetes/pkg/scheduler/profile"
 )
 
 // Option configures a framework.Registry.

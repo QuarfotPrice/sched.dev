@@ -23,12 +23,12 @@ import (
 	"io/ioutil"
 	"os"
 
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config/scheme"
+	configv1beta2 "github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config/v1beta2"
+	configv1beta3 "github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config/v1beta3"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/klog/v2"
-	"k8s.io/kubernetes/pkg/scheduler/apis/config"
-	"k8s.io/kubernetes/pkg/scheduler/apis/config/scheme"
-	configv1beta2 "k8s.io/kubernetes/pkg/scheduler/apis/config/v1beta2"
-	configv1beta3 "k8s.io/kubernetes/pkg/scheduler/apis/config/v1beta3"
 )
 
 func loadConfigFromFile(file string) (*config.KubeSchedulerConfiguration, error) {

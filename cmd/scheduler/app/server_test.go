@@ -29,6 +29,9 @@ import (
 	"time"
 
 	"github.com/QuarfotPrice/sched.dev/cmd/scheduler/app/options"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/apis/config/testing/defaults"
+	"github.com/QuarfotPrice/sched.dev/pkg/scheduler/framework/plugins/names"
 	"github.com/google/go-cmp/cmp"
 	"github.com/spf13/pflag"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -38,9 +41,6 @@ import (
 	featuregatetesting "k8s.io/component-base/featuregate/testing"
 	"k8s.io/kube-scheduler/config/v1beta3"
 	"k8s.io/kubernetes/pkg/features"
-	"k8s.io/kubernetes/pkg/scheduler/apis/config"
-	"k8s.io/kubernetes/pkg/scheduler/apis/config/testing/defaults"
-	"k8s.io/kubernetes/pkg/scheduler/framework/plugins/names"
 )
 
 func TestSetup(t *testing.T) {
