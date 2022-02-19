@@ -1,7 +1,13 @@
-name: Test
+name: workflow
 on: [push]
 jobs:
-  Unit-Test:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: make test
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
