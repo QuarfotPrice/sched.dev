@@ -3,3 +3,6 @@ all:
 
 test:
 	go test -v ./...
+
+build:
+	go build -o bin/scheduler ./cmd/scheduler
