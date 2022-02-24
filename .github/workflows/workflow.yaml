@@ -1,7 +1,18 @@
 name: workflow
 on: [push]
 jobs:
-  build:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17.x
+      - run: make test
+  build-and-push:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -11,24 +22,18 @@ jobs:
         with:
           go-version: 1.17.x
       - run: make build
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - run: make test
-  package:
-    runs-on: ubuntu-latest
-    steps:
-     - run: echo "Should build"
+      - run: docker build -f docker/Dockerfile.scheduler -t gcr.io/sched-dev/scheduler:${{GITHUB_SHA}} .
   integration:
+    needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-    - uses: debianmaster/actions-k3s@master
-      id: k3s
-      with:
-        version: 'v1.21.2-k3s1'
-    - run: |
-        kubectl get nodes
-        kubectl get pods -A
-        sleep 20
-        kubectl get pods -A
+    - run: echo "Should try to attach scheduler to k3s cluster"
+    # - uses: debianmaster/actions-k3s@master
+    #   id: k3s
+    #   with:
+    #     version: 'v1.21.2-k3s1'
+    # - run: |
+    #     kubectl get nodes
+    #     kubectl get pods -A
+    #     sleep 20
+    #     kubectl get pods -A
